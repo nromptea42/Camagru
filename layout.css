@@ -71,3 +71,13 @@ a {
 	bottom: 0;
 	width: 98%;
 }
+
+.inscription {
+	padding: 15px;
+}
+
+.champs {
+	width: 33%;
+	height: 30px;
+	font-size: 1.3em;
+}
