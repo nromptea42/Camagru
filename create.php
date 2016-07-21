@@ -1,8 +1,9 @@
+<?php
+	include("header.php");
+?>
+
 <html>
 	<body>
-	<?php
-		include("header.php");
-	?>
 	<div class="inscription">
   <div style="text-align: center; font-size: 1.5em;">Sign up</div>
   <br />
