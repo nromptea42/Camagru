@@ -1,11 +1,22 @@
 <?php
 
-  function checkUser($pdo, $email)
+  function checkEmail($pdo, $email)
   {
     $query = $pdo->prepare("SELECT * FROM users WHERE email = '".$email."'");
     $query->execute();
     $user = $query->fetchAll();
     if ($user[0][email] == $email) {
+      return (1);
+    }
+    return (0);
+  }
+
+  function checkLogin($pdo, $login)
+  {
+    $query = $pdo->prepare("SELECT * FROM users WHERE login = '".$login."'");
+    $query->execute();
+    $user = $query->fetchAll();
+    if ($user[0][login] == $login) {
       return (1);
     }
     return (0);

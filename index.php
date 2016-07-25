@@ -9,7 +9,7 @@ include("header.php");
 		<div class="first_time">
 			<div style="font-size: 1.5em;">Please sign in :</div><br />
 			<form action="login.php" method="post">
-				Id : <input type="text" name="id" value="">
+				Login : <input type="text" name="login" value="">
 				Password : <input type="password" name="pwd" value="">
 				<input type="submit" name="submit" value="Sign in">
 			</form><br />
