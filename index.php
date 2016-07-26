@@ -13,7 +13,7 @@ include("header.php");
 				Password : <input type="password" name="pwd" value="">
 				<input type="submit" name="submit" value="Sign in">
 			</form><br />
-			<div><a style="color: #D8CAA8" href="http://www.google.com">Forgot password ? </a></div><br />
+			<div><a style="color: #D8CAA8" href="forgot.php">Forgot password ? </a></div><br />
 			<div><a style="color: #D8CAA8" href="create.php">Sign Up </a></div>
 		</div>
 		<?php }

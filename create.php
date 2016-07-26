@@ -22,7 +22,7 @@
 			$query = $pdo->prepare("INSERT INTO `users` (`login`, `pwd`, `email`)
 				VALUES ('".$_POST[login]."', '".hash('sha256', $_POST[pwd])."', '".$_POST[email]."')");
 			$query->execute();
-			echo 'Inscription validée';
+			mail($_POST[email], "Inscription validée", "Inscription validée sur le super site nromptea");
 		}
 		else
 			foreach ($error as $err)
