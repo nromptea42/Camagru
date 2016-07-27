@@ -55,7 +55,7 @@ a {
 	text-decoration: none;
 }
 
-.first_time {
+.index {
 	padding: 10px;
 	margin-top: 10px;
 	height: 160px;
@@ -72,12 +72,29 @@ a {
 	width: 98%;
 }
 
-.inscription {
-	padding: 15px;
-}
-
 .champs {
 	width: 33%;
 	height: 30px;
 	font-size: 1.3em;
+}
+
+.forgot {
+	padding: 10px;
+	margin-top: 10px;
+	height: 140px;
+	background-color: #5C832F;
+}
+
+.sign_up {
+	padding: 10px;
+	margin-top: 10px;
+	height: 350px;
+	background-color: #5C832F;
+}
+
+.profil {
+	padding: 10px;
+	margin-top: 10px;
+	height: 300px;
+	background-color: #5C832F;
 }

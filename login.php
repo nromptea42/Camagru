@@ -12,6 +12,7 @@ if ($_POST[submit] == "Sign in")
         {
             $_SESSION[id] = $user[0][id];
             $_SESSION[login] = $user[0][login];
+            $_SESSION[email] = $user[0][email];
         }
         else
         { ?>

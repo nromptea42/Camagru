@@ -22,6 +22,7 @@
 			$query = $pdo->prepare("INSERT INTO `users` (`login`, `pwd`, `email`)
 				VALUES ('".$_POST[login]."', '".hash('sha256', $_POST[pwd])."', '".$_POST[email]."')");
 			$query->execute();
+			echo "Inscription validée !";
 			mail($_POST[email], "Inscription validée", "Inscription validée sur le super site nromptea");
 		}
 		else
@@ -32,12 +33,12 @@
 
 <html>
 	<body>
-	<div class="inscription">
-  <div style="text-align: center; font-size: 1.5em;">Sign up</div>
+	<div class="sign_up">
+  <div style="font-size: 1.5em;">Sign up :</div>
   <br />
 	<form action="create.php" method="post">
-		Login : <br /><input class="champs" type="text" name="login" value="" />
-		<br /><br />Email : <br /><input class="champs" type="email" name="email" value="" />
+		Login : <br /><input class="champs" type="text" name="login" value="<?php echo $_POST[login] ?>" />
+		<br /><br />Email : <br /><input class="champs" type="email" name="email" value="<?php echo $_POST[email] ?>" />
 		<br /><br />Password : <br /><input class="champs" type="password" name="pwd" value="" />
 		<br /><br />Confirm the password : <br /><input class="champs" type="password" name="pwd2" value="" />
 		<br /><br /><input type="submit" name="submit" value="Sign up" />

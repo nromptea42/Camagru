@@ -6,7 +6,7 @@ include("header.php");
 <html>
 	<body>
 	<?php if (!$_SESSION[id]) { ?>
-		<div class="first_time">
+		<div class="index">
 			<div style="font-size: 1.5em;">Please sign in :</div><br />
 			<form action="login.php" method="post">
 				Login : <input type="text" name="login" value="">

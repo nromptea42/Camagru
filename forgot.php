@@ -35,12 +35,13 @@ if ($_POST[submit] == "Recover")
 
 <html>
 	<body>
-	<div class="first_time">
+	<div class="forgot">
+	<div style="font-size: 1.5em;">Forgot your password ?</div>
 		<br /><br /><form action="" method="post">
 			Login : <input type="text" name="login" value="">
 			Email : <input type="text" name="email" value="">
 			<input type="submit" name="submit" value="Recover">
-		</form>
+		</form><br />
 		Please enter your login and your email to recover your password
 		</div>
 	</body>
