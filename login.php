@@ -14,22 +14,9 @@ if ($_POST[submit] == "Sign in")
             $_SESSION[login] = $user[0][login];
             $_SESSION[email] = $user[0][email];
         }
-        else
-        { ?>
-        <script type="text/javascript">
-            window.location = "index.php";
-        </script>
-        <?php
-        }
-    }
-    else
-    {
-        ?>
-        <script type="text/javascript">
-            window.location = "index.php";
-        </script>
-        <?php
     }
 }
-include("header.php");
 ?>
+<script type="text/javascript">
+    window.location = "index.php";
+</script>
