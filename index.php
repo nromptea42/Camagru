@@ -21,35 +21,39 @@ include("header.php");
 			<video id="video"></video>
 			<button id="startbutton">Prendre une photo</button>
 			<canvas id="canvas"></canvas>
-			<img src="http://placekitten.com/g/320/261" id="photo" alt="photo">
+			<img src="First-photo.png" class="first_photo" id="photo" alt="photo">
 			<script type="text/javascript">
-				(function() {
-console.log("ok");
+			
+			var my_data = "my_data";
+//<![CDATA[
+
+(function() {
+
   var streaming = false,
       video        = document.querySelector('#video'),
       cover        = document.querySelector('#cover'),
       canvas       = document.querySelector('#canvas'),
       photo        = document.querySelector('#photo'),
       startbutton  = document.querySelector('#startbutton'),
-      width = 320,
+      width = 300,
       height = 0;
 
-  navigator.getMedia = ( navigator.getUserMedia ||
+  navigator.getMedia = ( navigator.getUserMedia || 
                          navigator.webkitGetUserMedia ||
                          navigator.mozGetUserMedia ||
                          navigator.msGetUserMedia);
 
   navigator.getMedia(
-    {
-      video: true,
-      audio: false
+    { 
+      video: true, 
+      audio: false 
     },
     function(stream) {
-      if (navigator.mozGetUserMedia) {
+      if (navigator.mozGetUserMedia) { 
         video.mozSrcObject = stream;
       } else {
         var vendorURL = window.URL || window.webkitURL;
-        video.src = vendorURL.createObjectURL(stream);
+        video.src = vendorURL ? vendorURL.createObjectURL(stream) : stream;
       }
       video.play();
     },
@@ -70,20 +74,84 @@ console.log("ok");
   }, false);
 
   function takepicture() {
+  	var context = canvas.getContext('2d');
     canvas.width = width;
     canvas.height = height;
-    canvas.getContext('2d').drawImage(video, 0, 0, width, height);
+   context.drawImage(video, 0, 0, width, height);
     var data = canvas.toDataURL('image/png');
     photo.setAttribute('src', data);
+    my_data = data;
+    
+    /*******************/
+    
+    function getXMLHttpRequest() {
+    	var xhr = null;
+    	
+    	if (window.XMLHttpRequest || window.ActiveXObject) {
+    		if (window.ActiveXObject) {
+    			try {
+    				xhr = new ActiveXObject("Msxml2.XMLHTTP");
+    			} catch(e) {
+    				xhr = new ActiveXObject("Microsoft.XMLHTTP");
+    			}
+    		} else {
+    			xhr = new XMLHttpRequest(); 
+    		}
+    	} else {
+    		alert("Votre navigateur ne supporte pas l'objet XMLHTTPRequest...");
+    		return null;
+    	}
+    	
+    	return xhr;
+    }
+    
+    var xhr = getXMLHttpRequest();
+    console.log(xhr);
+    
+    xhr.open("post", "actions/upload_action.php", true);
+    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+    xhr.send("raw_data=" + my_data + "&selected_filter=prout");
+    
+    function callback(res) {
+      console.log(res);
+      console.warn('Sucer un pote, ça n\'a rien d\'homosexuel.')
+       window.location = "index.php";
+    }
+    
+    xhr.onreadystatechange = function() {
+    	if (xhr.readyState == 4 && (xhr.status == 200 || xhr.status == 0)) {
+    		// alert("OK"); // C'est bon \o/
+    		callback(xhr.responseText);
+    	}
+    };
+    
+    /******************/
   }
 
   startbutton.addEventListener('click', function(ev){
       takepicture();
     ev.preventDefault();
   }, false);
-
+  
 })();
-			</script>
+
+//]]>
+		</script>
+		<?php
+		$query = $pdo->prepare('SELECT * FROM photos ORDER BY id DESC LIMIT 3');
+    $query->execute();
+    $photos = $query->fetchAll();
+    ?>
+    <div class="photos_index">
+         <?php
+            foreach ($photos as $data)
+            { 
+               $img_src = str_replace(' ', '+', $data[src]); ?>
+            <img class="photo" src="<?php echo $img_src?>">
+         <?php }
+         ?>
+    </div>
+    
 		<?php }
 		include("footer.php");
 		?>

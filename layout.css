@@ -63,7 +63,6 @@ a {
 }
 
 .foot {
-	margin-top: 10px;
 	background-color: #284907;
 	height: 20px;
 	padding: 15px;
@@ -97,4 +96,21 @@ a {
 	margin-top: 10px;
 	height: 300px;
 	background-color: #5C832F;
+}
+
+canvas {
+	display: none;
+}
+
+.first_photo {
+	width: 300px;
+}
+
+.content {
+	padding: 10px;
+	margin-bottom: 50px;
+}
+
+.photo {
+	margin: 5px;
 }

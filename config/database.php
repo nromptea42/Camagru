@@ -1,6 +1,6 @@
 <?php
-    $DB_DSN = 'mysql:dbname=camagru;host=localhost';
-    $DB_USER = '';
+    $DB_DSN = 'mysql:dbname=camagru;host=' . getenv('IP') . '';
+    $DB_USER = 'root';
     $DB_PASSWORD = '';
     
     
