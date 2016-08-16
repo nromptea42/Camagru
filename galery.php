@@ -11,8 +11,11 @@ $photos = $query->fetchAll();
          <?php
             foreach ($photos as $data)
             {
-               $img_src = str_replace(' ', '+', $data[src]); ?>
-            <img class="photo" src="<?php echo $img_src?>">
+               $img_src = $data[src];
+               $id = $data[id];?>
+            <a href="photo.php/?id=<?php echo $id ?>">
+               <img class="photo" src="<?php echo $img_src?>">
+            </a>
          <?php }
          ?>
       </div>

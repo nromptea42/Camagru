@@ -20,6 +20,13 @@ include("header.php");
 		else { ?>
 			<video id="video"></video>
 			<button id="startbutton">Prendre une photo</button>
+			<select name="filter" id="filter">
+        <option value="none"></option>
+        <option value="beer">Beer</option>
+        <option value="mario">Mario</option>
+        <option value="dress">Dress</option>
+        <option value="scratches">Scratches</option>
+      </select>
 			<canvas id="canvas"></canvas>
 			<img src="First-photo.png" class="first_photo" id="photo" alt="photo">
 			<script type="text/javascript">
@@ -28,6 +35,15 @@ include("header.php");
 //<![CDATA[
 
 (function() {
+
+function getSelectedText(elementId) {
+    var elt = document.getElementById(elementId);
+
+    if (elt.selectedIndex == -1)
+        return null;
+
+    return elt.options[elt.selectedIndex].value;
+}
 
   var streaming = false,
       video        = document.querySelector('#video'),
@@ -74,6 +90,9 @@ include("header.php");
   }, false);
 
   function takepicture() {
+    var filter = getSelectedText("filter");
+    if (filter == "none")
+      return;
   	var context = canvas.getContext('2d');
     canvas.width = width;
     canvas.height = height;
@@ -110,12 +129,10 @@ include("header.php");
     
     xhr.open("post", "actions/upload_action.php", true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    xhr.send("raw_data=" + my_data + "&selected_filter=prout");
+    xhr.send("raw_data=" + my_data + "&selected_filter=" + filter);
     
     function callback(res) {
-      console.log(res);
-      console.warn('Sucer un pote, ça n\'a rien d\'homosexuel.')
-       window.location = "index.php";
+      window.location = "index.php";
     }
     
     xhr.onreadystatechange = function() {
@@ -138,7 +155,7 @@ include("header.php");
 //]]>
 		</script>
 		<?php
-		$query = $pdo->prepare('SELECT * FROM photos ORDER BY id DESC LIMIT 3');
+		$query = $pdo->prepare('SELECT * FROM photos WHERE id_log='.$_SESSION[id].' ORDER BY id DESC LIMIT 3');
     $query->execute();
     $photos = $query->fetchAll();
     ?>
