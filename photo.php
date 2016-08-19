@@ -34,7 +34,7 @@ $data2 = $query->fetchAll();
             <button class="like" type="button">J'aime</button></a>
          <a href="/dislike.php/?id=<?php echo $_GET['id']?>&id_log=<?php echo $_SESSION[id]?>">
             <button class="dislike" type="button">J'aime pas</button></a>
-         <br /><br /><div class="score"><?php echo $int ?></div>
+         <br /><br /><div class="score"><?php echo "Score : ". $int ?></div>
          <br /><form action="/comment.php" method="post">
 			   <input type="text" placeholder="Commentaire" name="comment" value="" required autofocus>
 				<input type="submit" name="submit" value="Comment">
