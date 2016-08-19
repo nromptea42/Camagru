@@ -1,7 +1,7 @@
 <?php
 
    include("../head.php");
-   $query = $pdo->prepare("SELECT * FROM `docs` ORDER BY id DESC LIMIT 1");
+   $query = $pdo->prepare("SELECT * FROM `docs` WHERE id_log='".$_SESSION[id]."' ORDER BY id DESC LIMIT 1");
    $query->execute();
    $docs = $query->fetchAll();
    pr($docs);
@@ -66,7 +66,7 @@ function save_new_image($image_object, $pdo) {
     $path = '../images/'.$filename.'.png';
     save_to_db($path, $pdo);
 }
-   if (isset($_POST['selected_filter'])) {
+   if (isset($_POST['selected_filter']) && ($_SESSION[id] == $docs[0][id_log])) {
       $path = '../images/filter/'.$_POST['selected_filter'].'.png';
       if ($docs[0][src]) {
          $new_image = merge_images("../" . $docs[0][src], $path, $docs[0][ext]);

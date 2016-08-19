@@ -161,7 +161,6 @@ function getSelectedText(elementId) {
     var filter = getSelectedText("filter");
     if (filter == "none")
       return;
-    console.warn("Sucez un pote ca n'a rien d'homosexuel.");
     
     /*******************/
     
