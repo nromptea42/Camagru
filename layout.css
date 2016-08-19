@@ -102,8 +102,14 @@ canvas {
 	display: none;
 }
 
+video {
+	margin-top: 10px;
+	float: left;
+	width: 33.33%;
+}
+
 .first_photo {
-	width: 300px;
+	display: none;
 }
 
 .content {
@@ -113,4 +119,55 @@ canvas {
 
 .photo {
 	margin: 5px;
+	width: 300px;
+	height: auto;
+}
+
+.photo_index {
+	float: left;
+	width: 33.33%;
+}
+
+.button {
+	margin-top: 10px;
+	float: left;
+	width: 33.33%;
+}
+
+.sidebar {
+	width: 300px;
+	height: auto;
+	margin-top: 5px;
+}
+
+.presentation {
+	margin: 5px;
+	width: 500px;
+	height: auto;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.things{
+	display: inline-block;
+}
+
+.del_photo {
+	border-radius: 0.5em;
+}
+
+.like {
+	height: 30px;
+	background-color: green;
+	border-radius: 0.5em;
+}
+
+.dislike {
+	height: 30px;
+	background-color: red;
+	border-radius: 0.5em;
+}
+
+.score {
+	font-size: 2em;
 }

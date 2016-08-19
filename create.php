@@ -1,7 +1,7 @@
 <?php
 	include("head.php");
 	include("header.php");
-
+if (!$_SESSION[id]) {
 	if ($_POST[submit] == "Sign up")
 	{
 		$error = [];
@@ -20,7 +20,7 @@
 		if (!$error)
 		{
 			$query = $pdo->prepare("INSERT INTO `users` (`login`, `pwd`, `email`)
-				VALUES ('".$_POST[login]."', '".hash('sha256', $_POST[pwd])."', '".$_POST[email]."')");
+				VALUES ('$pdo->quote$_POST[login]', '".hash('sha256', $_POST[pwd])."', '$pdo->quote$_POST[email]')");
 			$query->execute();
 			echo "Inscription validée !";
 			mail($_POST[email], "Inscription validée", "Inscription validée sur le super site nromptea");
@@ -37,10 +37,10 @@
   <div style="font-size: 1.5em;">Sign up :</div>
   <br />
 	<form action="create.php" method="post">
-		Login : <br /><input class="champs" type="text" name="login" value="<?php echo $_POST[login] ?>" />
-		<br /><br />Email : <br /><input class="champs" type="email" name="email" value="<?php echo $_POST[email] ?>" />
-		<br /><br />Password : <br /><input class="champs" type="password" name="pwd" value="" />
-		<br /><br />Confirm the password : <br /><input class="champs" type="password" name="pwd2" value="" />
+		Login : <br /><input autofocus required class="champs" type="text" name="login" value="<?php echo $_POST[login] ?>" />
+		<br /><br />Email : <br /><input required class="champs" type="email" name="email" value="<?php echo $_POST[email] ?>" />
+		<br /><br />Password : <br /><input required class="champs" type="password" name="pwd" value="" />
+		<br /><br />Confirm the password : <br /><input required class="champs" type="password" name="pwd2" value="" />
 		<br /><br /><input type="submit" name="submit" value="Sign up" />
 	</form>
 </div>
@@ -49,3 +49,6 @@
 	?>
 	</body>
 </html>
+<?php } else {
+	header('location: /index.php');
+} ?>

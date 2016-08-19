@@ -5,7 +5,7 @@ if ($_POST[submit] == "Sign in")
 {
 	if ($_POST[login] && $_POST[pwd])
 	{
-		$query = $pdo->prepare("SELECT * FROM users WHERE login = '".$_POST[login]."'");
+		$query = $pdo->prepare("SELECT * FROM users WHERE login = '$pdo->quote$_POST[login]'");
         $query->execute();
         $user = $query->fetchAll();
         if ($user[0][pwd] == hash('sha256', $_POST[pwd]))

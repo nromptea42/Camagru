@@ -2,7 +2,7 @@
 
   function checkEmail($pdo, $email)
   {
-    $query = $pdo->prepare("SELECT * FROM users WHERE email = '".$email."'");
+    $query = $pdo->prepare("SELECT * FROM users WHERE email = '$pdo->quote$email'");
     $query->execute();
     $user = $query->fetchAll();
     if ($user[0][email] == $email) {
@@ -13,7 +13,7 @@
 
   function checkLogin($pdo, $login)
   {
-    $query = $pdo->prepare("SELECT * FROM users WHERE login = '".$login."'");
+    $query = $pdo->prepare("SELECT * FROM users WHERE login = '$pdo->quote$login'");
     $query->execute();
     $user = $query->fetchAll();
     if ($user[0][login] == $login) {
@@ -24,7 +24,7 @@
 
   function getName($pdo, $id)
   {
-    $query = $pdo->prepare("SELECT * FROM users WHERE id = '".$id."'");
+    $query = $pdo->prepare("SELECT * FROM users WHERE id = '$pdo->quote$id'");
     $query->execute();
     $user = $query->fetchAll();
     if ($user) {
@@ -35,7 +35,7 @@
 
   function getUser($pdo, $id)
   {
-    $query = $pdo->prepare("SELECT * FROM users WHERE id = '".$id."'");
+    $query = $pdo->prepare("SELECT * FROM users WHERE id = '$pdo->quote$id'");
     $query->execute();
     $user = $query->fetchAll();
     if ($user) {
@@ -70,5 +70,4 @@
     }
     return $randomString;
   }
-
 ?>

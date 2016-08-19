@@ -1,7 +1,7 @@
 <?php
 	include("head.php");
 	include("header.php");
-
+if ($_SESSION[id]) {
 	if ($_POST[submit] == "Tu veux changer de mot de passe ?")
 		$ok = 1;
 	if ($_POST[submit] == "Change le !")
@@ -24,7 +24,7 @@
         	if ($user[0][pwd] == hash('sha256', $_POST[pwd]))
         	{
         		$hashed = hash('sha256', $_POST[newpwd]);
-        		$query = $pdo->prepare("UPDATE users SET pwd = '".$hashed."' WHERE login = '".$_SESSION[login]."'");
+        		$query = $pdo->prepare("UPDATE users SET pwd = '$pdo->quote$hashed' WHERE login = '".$_SESSION[login]."'");
 				$query->execute();
 				$ok = 0;
         	}
@@ -62,3 +62,7 @@
 	?>
 	</body>
 </html>
+
+<?php } else
+    header('location: /index.php');
+?>

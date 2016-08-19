@@ -2,13 +2,6 @@
    
    include("../head.php");
 
-   function save_picture($raw_picture, $pdo) {
-     $query = $pdo->prepare("INSERT INTO `photos` (`src`, `id_log`)
-				VALUES ('".$raw_picture."', '".$_SESSION[id]."')");
-		$query->execute();
-      echo 'ok';
-   }
-
 function save_picture_yes($raw_picture) {
     list($type, $raw_picture) = explode(';', $raw_picture);
     list(, $raw_picture)      = explode(',', $raw_picture);
@@ -38,17 +31,18 @@ function merge_images($first_picture_name, $second_picture_name) {
 }
 
 function get_file_name($pdo) {
+   $query = $pdo->prepare("INSERT INTO `photos` (`src`, `id_log`) VALUES ('wesh', '1')");
+   $query->execute();
     $statement = $pdo->prepare("SELECT MAX(id) FROM photos");
     $statement->execute();
     $row = $statement->fetch();
     echo $row[0] + 1; // Do not delete this, it's used for redirection.
-    return $row[0] + 1;
+    return $row[0];
 }
 
 function save_to_db($path, $pdo)
 {
-     $query = $pdo->prepare("INSERT INTO `photos` (`src`, `id_log`)
-				VALUES ('".$path."', '".$_SESSION[id]."')");
+     $query = $pdo->prepare("UPDATE `photos` SET `src` = '".$path."', `id_log` = '".$_SESSION[id]."' WHERE `src`='wesh'");
 		$query->execute();
 }
 
@@ -67,13 +61,12 @@ function save_new_image($image_object, $pdo) {
 }
 
    if (isset($_POST['raw_data']) && isset($_POST['selected_filter'])) {
-    //   save_picture($_POST['raw_data'], $pdo);
       save_picture_yes($_POST['raw_data']);
       $path = '../images/filter/'.$_POST['selected_filter'].'.png';
       $new_image = merge_images("../images/filter/image.png", $path);
       save_new_image($new_image, $pdo);
-   } else {
-       echo 'lol, nope.';
+   }   else {
+      header('location: /index.php');
    }
 
 ?>
